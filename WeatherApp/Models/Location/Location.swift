@@ -42,6 +42,9 @@ class Location: NSObject, ObservableObject {
         
         let location = CLLocation(latitude: placemarkCoordinate.latitude, longitude: placemarkCoordinate.longitude)
         try await fetchWeather(for: location)
+        
+        finder.completions = []
+        finder.query = ""
     }
     
     private func getCurrentWeather(for location: CLLocation) async throws -> WeatherData {

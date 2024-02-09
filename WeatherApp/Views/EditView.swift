@@ -19,10 +19,6 @@ struct EditView: View {
                     Button {
                         Task {
                             try? await location.changeLocation(completion)
-                            
-                            location.finder.completions = []
-                            location.finder.query = ""
-                            
                             dismiss()
                         }
                     } label: {

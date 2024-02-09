@@ -22,7 +22,7 @@ struct HomeView: View {
             Spacer()
             
             ForecastView()
-                .environmentObject(location)
+                .environmentObject(location.weather)
             
             Spacer()
             Spacer()

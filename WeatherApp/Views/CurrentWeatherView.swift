@@ -17,10 +17,10 @@ struct CurrentWeatherView: View {
                 .font(.title)
                 .padding(.top, 40)
             
-            Text("\(location.weather?.current?.temperature.formatted(.now) ?? "--")°")
+            Text("\(location.weather.current?.temperature.formatted(.now) ?? "--")°")
                 .font(.largeTitle)
             
-            Text(location.weather?.current?.condition.first?.description.capitalized ?? "")
+            Text(location.weather.current?.condition.first?.description.capitalized ?? "")
                 .font(.callout)
         }
         .foregroundStyle(Color.white)

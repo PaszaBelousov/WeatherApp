@@ -15,7 +15,7 @@ class Location: NSObject, ObservableObject {
     /// Current location title
     @Published var title: String?
     /// Current location weather
-    @Published var weather: Weather?
+    @Published var weather = Weather()
     
     ///Provides current user location
     let current = CurrentLocationService()

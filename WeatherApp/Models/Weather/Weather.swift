@@ -8,8 +8,13 @@
 import Foundation
 import Combine
 
-struct Weather {
+class Weather: ObservableObject {
     
     var current: WeatherData?
     var forecast: WeatherForecast?
+    
+    init(current: WeatherData? = nil, forecast: WeatherForecast? = nil) {
+        self.current = current
+        self.forecast = forecast
+    }
 }

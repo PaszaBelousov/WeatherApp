@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ForecastView: View {
     
-    @EnvironmentObject private var location: Location
+    @EnvironmentObject private var weather: Weather
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            ForEach(location.weather?.forecast?.limited() ?? [], id: \.timestamp) { weather in
+            ForEach(weather.forecast?.limited() ?? [], id: \.timestamp) { weather in
                 HStack {
                     VStack(alignment: .leading) {
                         Text(weather.date())

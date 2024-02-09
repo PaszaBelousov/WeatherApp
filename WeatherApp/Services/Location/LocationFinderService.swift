@@ -14,8 +14,6 @@ class LocationFinderService: NSObject, ObservableObject, MKLocalSearchCompleterD
     @Published var completions = [MKLocalSearchCompletion]()
     
     private let completer = MKLocalSearchCompleter()
-    
-    private var continuation: CheckedContinuation<CLLocation, Error>?
     private var cancellable: AnyCancellable?
     
     override init() {

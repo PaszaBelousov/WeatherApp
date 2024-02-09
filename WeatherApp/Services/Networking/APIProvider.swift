@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-enum APIProviderErrors: Error {
+enum NetworkError: Error {
     
     case badURL
     case badRequest
@@ -23,23 +23,26 @@ class APIProvider {
     func getData(from endpoint: EndpointProtocol) async throws -> (Data, URLResponse) {
         
         guard let url = URLComponents(string: endpoint.absoluteURL)?.url else {
-            throw APIProviderErrors.badURL
+            throw NetworkError.badURL
         }
         
         return try await URLSession.shared.data(from: url)
     }
-    
     
     func mapResponse(response: (data: Data, response: URLResponse)) throws -> Data {
         guard let httpResponse = response.response as? HTTPURLResponse else {
             return response.data
         }
         
-        let statusCode = URLError.Code(rawValue: httpResponse.statusCode)
-        if statusCode.rawValue > 300 {
-            throw URLError(statusCode)
-        } else {
+        switch httpResponse.statusCode {
+        case 200..<300:
             return response.data
+        case 400:
+            throw NetworkError.badRequest
+        case 401:
+            throw NetworkError.unauthorized
+        default:
+            throw NetworkError.http(httpResponse: httpResponse, data: response.data)
         }
     }
 }

@@ -18,13 +18,14 @@ struct ForecastView: View {
                     VStack(alignment: .leading) {
                         Text(weather.date())
                         Text(weather.condition.first?.description.capitalized ?? "")
+                            .font(.caption)
                     }
                     
                     Spacer()
                     
                     VStack(alignment: .trailing) {
-                        Text("Min: \(weather.temperature.formatted(.min))°")
-                        Text("Max: \(weather.temperature.formatted(.max))°")
+                        Text("\(weather.temperature.formatted(.min))")
+                        Text("\(weather.temperature.formatted(.max))")
                     }
                 }
             }

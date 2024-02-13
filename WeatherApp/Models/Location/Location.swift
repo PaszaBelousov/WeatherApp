@@ -50,16 +50,16 @@ class Location: NSObject, ObservableObject {
     private func getCurrentWeather(for location: CLLocation) async throws -> WeatherData {
         let endpoint = WeatherEndpoint.getCurrent(latitude: location.coordinate.latitude,
                                                   longitude: location.coordinate.longitude)
-        let reesponse = try await APIProvider.shared.getData(from: endpoint)
-        let data = try APIProvider.shared.mapResponse(response: reesponse)
+        let response = try await APIProvider.shared.getResponse(from: endpoint)
+        let data = try APIProvider.shared.getData(for: response)
         return try JSONDecoder().decode(WeatherData.self, from: data)
     }
     
     private func getForecast(for location: CLLocation) async throws -> WeatherForecast {
         let endpoint = WeatherEndpoint.getForecast(latitude: location.coordinate.latitude,
                                                    longitude: location.coordinate.longitude)
-        let reesponse = try await APIProvider.shared.getData(from: endpoint)
-        let data = try APIProvider.shared.mapResponse(response: reesponse)
+        let response = try await APIProvider.shared.getResponse(from: endpoint)
+        let data = try APIProvider.shared.getData(for: response)
         return try JSONDecoder().decode(WeatherForecast.self, from: data)
     }
     

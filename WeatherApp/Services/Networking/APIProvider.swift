@@ -20,8 +20,7 @@ class APIProvider {
     
     static let shared: APIProvider = .init()
     
-    func getData(from endpoint: EndpointProtocol) async throws -> (Data, URLResponse) {
-        
+    func getResponse(from endpoint: EndpointProtocol) async throws -> (Data, URLResponse) {
         guard let url = URLComponents(string: endpoint.absoluteURL)?.url else {
             throw NetworkError.badURL
         }
@@ -29,7 +28,7 @@ class APIProvider {
         return try await URLSession.shared.data(from: url)
     }
     
-    func mapResponse(response: (data: Data, response: URLResponse)) throws -> Data {
+    func getData(for response: (data: Data, response: URLResponse)) throws -> Data {
         guard let httpResponse = response.response as? HTTPURLResponse else {
             return response.data
         }
